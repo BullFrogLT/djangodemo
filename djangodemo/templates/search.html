@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block csssytle %}
+    <style type="text/css">
+        .dj-info {
+            height: 85px;
+            width: 265px;
+        }
+
+        .aa {
+            margin-left: 0px;
+            padding: 0px;
+            margin-right: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 aa ">
+                <div class="panel panel-info dj-info">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <span>数据总条数: </span>
+                            <span style="float: right">{{ data.result.count }}</span>
+                        </div>
+                    </div>
+                    <div class="panel-body"></div>
+                </div>
+            </div>
+            <div class="col-lg-2 aa ">
+                <div class="panel panel-info dj-info">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <span>IP总数: </span>
+                            <span style="float: right">{{ data.ipcount }}</span>
+                        </div>
+                    </div>
+                    <div class="panel-body"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">监控上报</div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>告警来源</th>
+                    <th>所属角色</th>
+                    <th>所属机器</th>
+                    <th>插件</th>
+                    <th>检查项</th>
+                    <th>告警标题</th>
+                    <th>告警信息</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for d in data.result %}
+                    <tr>
+                        <td>{{ d.alert_from }}</td>
+                        <td>{{ d.from_role }}</td>
+                        <td>{{ d.from_machine }}</td>
+                        <td>{{ d.from_plugin }}</td>
+                        <td>{{ d.from_check_method }}</td>
+                        <td>{{ d.alert_title }}</td>
+                        <td>{{ d.message }}</td>
+                    </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
